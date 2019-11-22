@@ -1,0 +1,92 @@
+Task 1
+Write your schemas below. Consider your MySQL database as part of the given music database.
+
+======
+MySQL:
+======
+
+-- Tool used: https://app.dbdesigner.net/designer/schema/new
+
+
+DROP DATABASE IF EXISTS music;
+
+CREATE DATABASE music;
+
+USE music;
+
+CREATE TABLE `users` (
+	`user_id` varchar(8) NOT NULL,
+	`username` varchar(32) NOT NULL,
+	PRIMARY KEY (`user_id`)
+);
+
+CREATE TABLE `song_info` (
+	`song_title` varchar(32) NOT NULL,
+	`lyrics` TEXT,
+	`num_listening_slots` int(11) NOT NULL DEFAULT '3',
+	`country` varchar(32) NOT NULL,
+	`song_file_name` varchar(32),
+	PRIMARY KEY (`song_title`)
+);
+
+CREATE TABLE `user_checked_out` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`song_title` varchar(32) NOT NULL,
+	`user_id` varchar(8) NOT NULL,
+	`checkout_datetime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `song_checked_out` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`user_id` varchar(8) NOT NULL,
+	`song_title` varchar(32) NOT NULL,
+	`checkout_datetime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `user_checked_out` ADD CONSTRAINT `user_checked_out_fk0` FOREIGN KEY (`song_title`) REFERENCES `song_info`(`song_title`);
+
+ALTER TABLE `user_checked_out` ADD CONSTRAINT `user_checked_out_fk1` FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`);
+
+ALTER TABLE `song_checked_out` ADD CONSTRAINT `song_checked_out_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`);
+
+ALTER TABLE `song_checked_out` ADD CONSTRAINT `song_checked_out_fk1` FOREIGN KEY (`song_title`) REFERENCES `song_info`(`song_title`);
+
+INSERT INTO users(user_id, username) VALUES
+	('4d0cae84', 'fred'),
+	('26a85b1c', 'barney'),
+	('675cee52', 'betty'),
+	('27b965f6', 'wilma'),
+	('820e8a4d', 'bambam'),
+	('fc42a34d', 'pebbles');
+
+=======
+MongoDB
+=======
+
+// User history: only inserts are done - updates and deletes are rare.
+// Therefore, noSQL database (mongoDB) used
+
+client.db(music).collection(user_history).insert(
+    {
+        song_title: song_title,
+    	user_id: user_id,
+    	checkout_datetime: $currentDate
+    }
+)
+
+
+
+Explain briefly your choice of persistence store.
+
+
+Task 7
+Using the information capture by your application's data model and the database connections/pool declared in your application, show using JavaScript, the ranking of national anthems by their listening popularity across your service's user base. You should rank your the songs from the most popular to the least popular. The ranking information must include the following 
+- song name
+- number of the times it was listen
+- the last time (date and time) the song was listen
+
+
+// Aggregate data in mongo db
+
