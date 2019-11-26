@@ -1,0 +1,31 @@
+<h4>List of available songs for listening</h4>
+
+<table style="width:100%" border="1">
+  <tr>
+    <th>Flag</th>
+    <th>Title</th> 
+    <th>Country</th>
+    <th>Status</th>
+  </tr>
+  {{#each songs}}
+  <tr>
+      <th><img src='/images/{{ this.countryCode }}.png' height="50px"></th>
+      <th>{{ this.title }}</th>
+      <th>{{ this.country }}</th>
+      {{#if this.status}}
+      <th>
+          <form action="/api/songs/listen/{{ this.title }}" method="GET">
+            <input type="hidden" name="user" value={{ ../user }}>
+            <button type="submit">Listen</button>
+          </form>
+      </th>
+      {{else}}
+      <th><i>Not available</i></th>
+      {{/if}}
+  </tr>
+  {{/each}}
+</table>
+
+<form method="GET" action="/">
+    <button type="submit">Back to index</button>
+</form>

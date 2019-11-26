@@ -1,0 +1,22 @@
+
+
+<div>
+    <h2>{{ songInfo.song_title }}</h2>
+    <img src='/images/{{ songInfo.countryCode }}.png' height="50px">
+    <audio controls>
+    <source src='https://abc1234.sgp1.digitaloceanspaces.com/music/{{ songInfo.song_file_name }}' type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<div style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    {{ songInfo.lyrics }}
+</div>
+
+<div>
+    <span><i>Played: </i>{{ songPlayCount }}</span>
+    <form action="/api/songs/delete" method="GET">
+        <input type="hidden" name="id" value={{ insertedId }}>
+        <button type="submit">Back</button>
+    </form>
+</div>

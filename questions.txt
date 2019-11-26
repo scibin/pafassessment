@@ -23,7 +23,7 @@ CREATE TABLE `users` (
 CREATE TABLE `song_info` (
 	`song_title` varchar(32) NOT NULL,
 	`lyrics` TEXT,
-	`num_listening_slots` int(11) NOT NULL DEFAULT '3',
+	`num_listening_slots` int(11) NOT NULL DEFAULT 3,
 	`country` varchar(32) NOT NULL,
 	`song_file_name` varchar(32),
 	PRIMARY KEY (`song_title`)
@@ -65,8 +65,6 @@ INSERT INTO users(user_id, username) VALUES
 MongoDB
 =======
 
-// User history: only inserts are done - updates and deletes are rare.
-// Therefore, noSQL database (mongoDB) used
 
 client.db(music).collection(user_history).insert(
     {
@@ -79,6 +77,12 @@ client.db(music).collection(user_history).insert(
 
 
 Explain briefly your choice of persistence store.
+// song_check_out will be required to regularly perform inserts and deletes (number of user slots control)
+// users and song_info are required for user_checked_out and song_checked_out
+// For ease of usage, all of them are put into MySQL database
+
+// User history: only inserts are done - updates and deletes are rare.
+// Therefore, noSQL database (mongoDB) used
 
 
 Task 7

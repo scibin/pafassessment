@@ -3,7 +3,7 @@
 // ||| MySQL
 
 // Name of MySQL database to connect to
-const sqldbName = 'myfb';
+const sqldbName = 'music';
 // Max pool connection limit
 const sqlConnLimit = 4;
 
@@ -15,7 +15,7 @@ const DO_SPACE_URL = 'sgp1.digitaloceanspaces.com';
 // Name of the DigitalOcean bucket
 const bucketName = 'abc1234';
 // Name of the folder for the file(s) to be stored in the bucket
-const bucketFolderName = 'day28';
+const bucketFolderName = 'music';
 // File to be used for testing the connection to the space
 const bucketTestKey = 'forTestingConnectionDontDelete.txt';
 
@@ -23,9 +23,9 @@ const bucketTestKey = 'forTestingConnectionDontDelete.txt';
 // ||| Atlas MongoDB
 
 // Name of the database
-const mongoDBName = 'sample_airbnb';
+const mongoDBName = 'music';
 // Name of the collection
-const mongoDBCollection = 'listingsAndReviews';
+const mongoDBCollection = 'user_history';
 
 module.exports = {
     sqldbName,

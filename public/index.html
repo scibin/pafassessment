@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>PAF Assessment</title>
+    </head>
+    <body>
+        <h2>Song Upload</h2>
+        <form method="POST" action="/api/upload" enctype="multipart/form-data">
+            <label for="username">Username: </label>
+            <br>
+            <input type="text" id='username' name='username' required>
+            <br><br>
+            <label for="song_name">Title: </label>
+            <br>
+            <input type="text" id='song_name' name='song_name' required>
+            <br><br>
+            <label for="country">Country: </label>
+            <br>
+            <select name="country" required>
+                <option value="Japan">Japan</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Russian_Federation">Russian Federation</option>
+                <option value="Singapore">Singapore</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States">United States</option>
+            </select>
+            <br><br>
+            <label for="listen_slots">Listen slots: </label>
+            <br>
+            <select name="listen_slots" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br><br>
+            <label for="lyrics">Lyrics: </label>
+            <br>
+            <textarea id="lyrics" name='lyrics' cols="40" rows="10"
+            placeholder='Insert your lyrics here'></textarea>
+            <br><br>
+            <label for="musicfile">MP3 File: </label>
+            <br>
+            <input type="file" id='musicfile' name='musicfile' required>
+            <br><br>
+            <button type="submit">Upload</button>
+        </form>
+        <hr>
+
+        <form method="GET" action="/api/songs/all">
+            <button type="submit">List all uploaded songs</button>
+        </form>
+        <hr>
+        <form method="GET" action="/api/songs/listen">
+            <input type="text" name='user' placeholder="Enter your username here" required>
+            <button type="submit">List available songs for listening</button>
+        </form>
+    </body>
+</html>
